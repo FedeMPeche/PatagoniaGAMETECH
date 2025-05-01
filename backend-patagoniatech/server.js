@@ -35,3 +35,13 @@ app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
 });
 
+// Servir archivos estáticos del frontend
+app.use(express.static('public')); // o el nombre de tu carpeta de frontend
+
+// Para que funcionen rutas del lado del cliente (SPA)
+const path = require('path');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
