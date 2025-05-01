@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Patagonia Tech, Gaming, Productos de electronica y regaleria.">
+    <title>CARRITO - PATAGONIA GAMETECH</title>
+    <link rel="icon" href="/img/logo.webp">
+    <link rel="stylesheet" href="css/carrito.css">
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdpdDwqAAAAADOZ6ydz5qpnwPu2R3jlB6NACRR7"></script>
+</head>
+
+<body>
+  <header>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+      <div class="logo-contenedor">
+          <a href="index.html">
+              <img src="img/logoPatagoniaPNG.png" alt="Logo de la empresa" class="logo">
+              <span class="saludo">BIENVENIDOS</span>
+          </a>
+      </div>
+      <ul class="nav-list">
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="productos.html">PRODUCTOS</a></li>
+          <li><a href="mayorista.html">VENTA MAYORISTA</a></li>
+          <li><a href="perfil.html">👤 PERFIL</a></li>
+          <li><a href="carrito.html">🛒 CARRITO</a></li>
+      </ul>
+
+      <div class="marquesina-contenedor">
+          <div class="marquesina">
+              <p>Envíos a todo el país • Productos gamer y tecnología para el hogar en un solo
+                  lugar • No te olvides de visitar nuestro catálogo al por mayor! • La demora de los envios esta sujeto 
+                  a disponiiblidad de stock, se le informará al cliente procesada su compra o puede consultarlo antes
+                  de la misma a través de nuestro botón de WhatsApp - PatagoniaTECH</p>
+          </div>
+      </div>
+
+      <div class="navbar-icon" id="navbarBoton">
+          <img id="navbarImg" src="img/menu.svg" alt="navbar">
+      </div>
+
+      <div class="navbar-responsive" id="navbarResponsive">
+          <ul class="navlist-responsive">
+              <li><a href="index.html">INICIO</a></li>
+              <li><a href="productos.html">PRODUCTOS</a></li>
+              <li><a href="mayorista.html">VENTA MAYORISTA</a></li>
+              <li><a href="#contacto">CONTACTO</a></li>
+              <li><a href="perfil.html">👤 PERFIL</a></li>
+              <li class="carritoResponsive"><a href="carrito.html">🛒 CARRITO</a></li>
+          </ul>
+      </div>
+  </nav>
+</header>
+
+<main class="carrito-layout">
+  <section class="aclaracion-transferencia">
+    <h4>Los pagos se realizan via transferencia - NO FINALIZAR PEDIDO SIN HABER HECHO LA TRANSFERENCIA ANTES -;
+      una vez finalizado el pedido nos va a llegar automáticamente un mensaje con el detalle del mismo
+      para prepararlo y despacharlo, si quiere y lo desea puede comunicarse a través
+      de nuestro WhatsApp: +5492984685737; o por mensaje a nuestro Instagram para adjuntar comprobante de pago y agilizar su pedido, 
+      será respondido a la brevedad.<br>Muchas gracias!</h4>
+      <h3>HORARIO DE ATENCIÓN: Lunes a Sábados 8am - 20pm.</h3>
+    </h4>
+  </section>
+  <section class="pago-transferencia">
+    <h3>DATOS PARA EL PAGO DEL PEDIDO</h3>
+    <p><strong>BANCO:</strong> BBVA BANCO FRANCES.</p>
+    <p><strong>ALIAS:</strong> BLUSA.SALA.BECA</p>
+    <p><strong>CBU:</strong> 0170083140000045154931</p>
+    <p><strong>TITULAR:</strong> Federico Manuel Peche.</p>
+  </br>
+    <p><strong>BANCO:</strong> BELO PAXSYS</p>
+    <p><strong>ALIAS:</strong> fedepch.belo</p>
+    <p><strong>CBU:</strong> 0000139300000001464524</p>
+    <p><strong>TITULAR:</strong> Federico Manuel Peche.</p>
+  </section>
+
+  <section class="carrito-seccion">
+    <div id="total-carrito" class="total-carrito"></div>
+    <button id="finalizar-pedido" class="boton-finalizar">FINALIZAR PEDIDO</button>
+    <h2 class="titulo-carrito">TU CARRITO &#x25BC;</h2>
+    <div id="carrito-contenedor" class="carrito-listado"></div>
+  </section>
+</main>
+
+
+  <footer>
+    <!--COLUMNA IZQUIERDA-->
+    <section class="footer-left">
+        <h4>DESARROLLADOR:</h4>
+        <div class="dev-container">
+            <div class="dev">
+                <a href="https://www.linkedin.com/in/federicopch/" target="_blank">
+                    <img src="img/Linkedin.svg" alt="linkedin" width="35px" height="50px">
+                </a>
+                <h4>Federico Peche</h4>
+                <h5>Full web stack Dev QA Tester</h5>
+            </div>
+        </div>
+    </section>
+
+    <!--COLUMNA DERECHA-->
+    <section class="footer-right">
+        <p>© 2025 PATAGONIA GAMETECH - Todos los derechos reservados</p>
+    </section>
+</footer>
+<script src="js/navbar.js"></script>
+<script src="js/mobile-navbar.js"></script>
+<script src="js/carrito.js"></script>
+</body>
+
+</html>
