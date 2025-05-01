@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const detallePedido = document.getElementById("detallePedido");
 
   try {
-    const res = await fetch("http://localhost:8080/api/pedidos/mios", {
+    const res = await fetch("https://patagonia-gametech-backend.onrender.com/api/pedidos/mios", {
       headers: { Authorization: `Bearer ${token}` },
     });
 

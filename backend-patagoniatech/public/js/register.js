@@ -28,7 +28,7 @@ form.addEventListener('submit', async (e) => {
   errorElement.textContent = '';
 
   try {
-    const res = await fetch('http://localhost:8080/api/usuarios/registro', {
+    const res = await fetch('https://patagonia-gametech-backend.onrender.com/api/usuarios/registro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, contraseña: password, nombre })

@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 0);
   
     try {
-      const res = await fetch('http://localhost:8080/api/pedidos', {
+      const res = await fetch('https://patagonia-gametech-backend.onrender.com/api/pedidos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

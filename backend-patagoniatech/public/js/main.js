@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const carousel = document.getElementById('destacados-carousel');
   
     try {
-      const res = await fetch('http://localhost:8080/api/productos');
+      const res = await fetch('https://patagonia-gametech-backend.onrender.com/api/productos');
       const productos = await res.json();
   
       // Filtramos solo los 5 primeros como ejemplo de destacados

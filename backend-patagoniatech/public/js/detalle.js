@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  fetch(`http://localhost:8080/api/productos/${id}`)
+  fetch(`https://patagonia-gametech-backend.onrender.com/api/productos/${id}`)
     .then(res => res.json())
     .then(producto => {
       detalleContainer.innerHTML = `
