@@ -20,25 +20,18 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log("✅ Conectado a MongoDB Atlas"))
   .catch((err) => console.error("❌ Error al conectar MongoDB", err));
 
+// Rutas de la API
 app.use('/api/auth', authRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/pedidos', pedidosRoutes);
+
+// Servir archivos estáticos (si tienes imágenes, por ejemplo)
 app.use('/uploads', express.static('uploads'));
 
-
+// Solo escuchar en el puerto del backend
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
-});
-
-const path = require('path');
-
-// Carpeta donde está tu index.html
-app.use(express.static(path.join(__dirname, 'public'))); 
-
-// Para rutas desconocidas, devolver index.html (SPA fallback)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
