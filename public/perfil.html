@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Patagonia Tech, Gaming, Productos de electronica y regaleria.">
+  <title>PATAGONIA GAMETECH</title>
+  <link rel="icon" href="/img/logo.webp">
+  <link rel="stylesheet" href="css/perfil.css">
+  <script src="https://www.google.com/recaptcha/api.js?render=6LdpdDwqAAAAADOZ6ydz5qpnwPu2R3jlB6NACRR7"></script>
+</head>
+
+<body>
+  <header>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+      <div class="logo-contenedor">
+        <a href="index.html">
+          <img src="img/logoPatagoniaPNG.png" alt="Logo de la empresa" class="logo">
+          <span class="saludo">BIENVENIDOS</span>
+        </a>
+      </div>
+
+      <div class="navbar-icon" id="navbarBoton">
+        <img id="navbarImg" src="img/menu.svg" alt="navbar">
+      </div>
+
+      <ul class="nav-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="productos.html">PRODUCTOS</a></li>
+        <li><a href="mayorista.html">VENTA MAYORISTA</a></li>
+        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+        <li><a href="carrito.html">🛒 CARRITO</a></li>
+      </ul>
+      </div>
+
+      <div class="navbar-responsive" id="navbarResponsive">
+        <ul class="navlist-responsive">
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="productos.html">PRODUCTOS</a></li>
+          <li><a href="mayorista.html">VENTA MAYORISTA</a></li>
+          <button class="btn-cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+          <li><a href="carrito.html">🛒 CARRITO</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="perfil-contenedor">
+    <h1>MI PERFIL</h1>
+
+    <div class="perfil-bloque">
+      <h2>Datos de Usuario</h2>
+      <div id="datosPerfil"></div>
+    </div>
+
+    <div class="perfil-bloque">
+      <h2>Historial de Pedidos</h2>
+      <ul id="listaPedidos"></ul>
+    </div>
+
+    <div id="detallePedido" class="detalle-pedido oculto perfil-bloque"></div>
+  </main>
+
+  <footer>
+    <!--COLUMNA IZQUIERDA-->
+    <section class="footer-left">
+      <h4>DESARROLLADOR:</h4>
+      <div class="dev-container">
+        <div class="dev">
+          <a href="https://www.linkedin.com/in/federicopch/" target="_blank">
+            <img src="img/Linkedin.svg" alt="linkedin" width="35px" height="50px">
+          </a>
+          <h4>Federico Peche</h4>
+          <h5>Full web stack Dev QA Tester</h5>
+        </div>
+      </div>
+    </section>
+
+    <!--COLUMNA DERECHA-->
+    <section class="footer-right">
+      <p>© 2025 PATAGONIA GAMETECH - Todos los derechos reservados</p>
+    </section>
+  </footer>
+  <script src="js/navbar.js"></script>
+  <script src="js/mobile-navbar.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+
+</html>
