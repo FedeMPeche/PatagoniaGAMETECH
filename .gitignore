@@ -1,18 +1,30 @@
-# Evitar subir dependencias y variables de entorno
+# Node.js
 node_modules/
-.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
 
 # Logs
+logs/
 *.log
+log.txt
 
-# Archivos del sistema
+# dotenv
+.env
+
+# sistema operativo
 .DS_Store
 Thumbs.db
 
-# IDEs
+# IDEs y editores
 .vscode/
 .idea/
+*.swp
 
-# Otros
+# Producción/Build (si llegás a compilar algo)
 dist/
 build/
+
+# Subidas locales
+uploads/
