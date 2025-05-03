@@ -3,24 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detalle del Producto - Patagonia GameTech</title>
-  <link rel="stylesheet" href="css/estilos.css" />
+  <meta name="description" content="Patagonia Tech, Gaming, Productos de electronica y regaleria.">
+  <title>DETALLE - PATAGONIA GAMETECH</title>
+  <link rel="icon" href="/img/logo.webp">
+  <link rel="stylesheet" href="css/stylesProductos.css">
 </head>
 <body>
   <header>
-    <h1>Detalle del Producto</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="productos.html">Productos</a>
-      <a href="mayorista.html">Venta Mayorista</a>
-      <a href="perfil.html">Perfil</a>
-      <a href="carrito.html">Carrito</a>
+    <h1>DETALLE DEL PRODUCTO</h1>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+      <div class="logo-contenedor">
+        <a href="index.html">
+          <img src="img/logoPatagoniaPNG.png" alt="Logo de la empresa" class="logo">
+          <span class="saludo">BIENVENIDOS</span>
+        </a>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="productos.html">PRODUCTOS</a></li>
+        <li><a href="mayorista.html">VENDÉ MAYORISTA</a></li>
+        <li><a href="perfil.html">👤 PERFIL</a></li>
+        <li><a href="carrito.html" id="carrito-navbar">🛒 CARRITO</a></li>
+      </ul>
+
+      <div class="marquesina-contenedor">
+        <div class="marquesina">
+          <p>Envíos a todo el país • Productos gamer y tecnología para el hogar en un solo
+            lugar • No te olvides de visitar nuestro catálogo al por mayor! • La demora de los envios esta sujeto
+            a disponiiblidad de stock, se le informará al cliente procesada su compra o puede consultarlo antes
+            de la misma a través de nuestro botón de WhatsApp - PatagoniaTECH</p>
+        </div>
+      </div>
+      
+      <div class="navbar-icon" id="navbarBoton">
+        <img id="navbarImg" src="img/menu.svg" alt="navbar">
+      </div>
+
+      <div class="navbar-responsive" id="navbarResponsive">
+        <ul class="navlist-responsive">
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="productos.html">PRODUCTOS</a></li>
+          <li><a href="mayorista.html">VENTA MAYORISTA</a></li>
+          <li><a href="perfil.html">👤 PERFIL</a></li>
+          <li><a href="carrito.html">🛒 CARRITO</a></li>
+        </ul>
+        <ul class="redes-responsive">
+          <li>
+            <a href="https://www.instagram.com/patagonia.gametech/" target="_blank">
+              <img class="social-logo" src="img/Instagram.svg" alt="instagram">
+            </a>
+          </li>
+          <li>
+            <a href="index.html" target="_blank">
+              <img class="social-logo" src="img/Facebook.svg" alt="facebook">
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
   </header>
 
   <main class="detalle-container">
     <div id="detalleProducto"></div>
   </main>
+
+  <footer>
+    <!--COLUMNA IZQUIERDA-->
+    <section class="footer-left">
+      <h4>DESARROLLADOR:</h4>
+      <div class="dev-container">
+        <div class="dev">
+          <a href="https://www.linkedin.com/in/federicopch/" target="_blank">
+            <img src="img/Linkedin.svg" alt="linkedin" width="35px" height="50px">
+          </a>
+          <h4>Federico Peche</h4>
+          <h5>Full web stack Dev QA Tester</h5>
+        </div>
+      </div>
+    </section>
+
+    <!--COLUMNA DERECHA-->
+    <section class="footer-right">
+      <p>© 2025 PATAGONIA GAMETECH - Todos los derechos reservados</p>
+    </section>
+  </footer>
 
   <script src="js/detalle.js"></script>
 </body>
