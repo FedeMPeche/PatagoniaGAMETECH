@@ -1,3 +1,18 @@
+// Servir archivos estáticos del frontend
+app.use(express.static('public'));
+
+// Rutas de la API
+app.use('/api/auth', authRoutes);
+app.use('/api/productos', productosRoutes);
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/pedidos', pedidosRoutes);
+
+// Para que funcionen rutas del lado del cliente (SPA)
+const path = require('path');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -20,12 +35,6 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log("✅ Conectado a MongoDB Atlas"))
   .catch((err) => console.error("❌ Error al conectar MongoDB", err));
 
-// Rutas de la API
-app.use('/api/auth', authRoutes);
-app.use('/api/productos', productosRoutes);
-app.use('/api/usuarios', usuariosRoutes);
-app.use('/api/pedidos', pedidosRoutes);
-
 // Servir archivos estáticos (si tienes imágenes, por ejemplo)
 app.use('/uploads', express.static('uploads'));
 
@@ -33,15 +42,6 @@ app.use('/uploads', express.static('uploads'));
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
-});
-
-// Servir archivos estáticos del frontend
-app.use(express.static('public')); // o el nombre de tu carpeta de frontend
-
-// Para que funcionen rutas del lado del cliente (SPA)
-const path = require('path');
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
