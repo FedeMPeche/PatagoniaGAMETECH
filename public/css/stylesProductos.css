@@ -184,6 +184,100 @@ main {
 }
 .agregar-carrito:hover { background-color: #0aaf60; }
 
+.detalle-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.detalle-card {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.detalle-card .imagenes {
+  width: 40%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detalle-card .imagenes img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.detalle-card .info {
+  padding: 20px;
+  width: 60%;
+}
+
+.detalle-card .info h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.detalle-card .info p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.detalle-card .info .precio {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.detalle-card .info .cantidad {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.detalle-card .info .cantidad button {
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.detalle-card .info .cantidad input {
+  width: 50px;
+  padding: 5px;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.detalle-card .info #agregarCarrito {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.detalle-card .info #agregarCarrito:hover {
+  background-color: #218838;
+}
+
+
 @keyframes carritoBrillo {
   0%   { color: white; transform: scale(1); }
   50%  { color: #0bd476; transform: scale(1.2); }
