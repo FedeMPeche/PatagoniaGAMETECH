@@ -2,9 +2,11 @@ let pagina = 1;
 const limitePorPagina = 8;
 let cargando = false;
 let noHayMasProductos = false;
+
 const backendURL = window.location.hostname.includes('localhost')
   ? 'http://localhost:8080'
   : 'https://patagoniagametech.onrender.com';
+
 const contenedor = document.getElementById("mayorista-grid");
 const loader = document.getElementById("loader");
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -105,7 +107,16 @@ function handleScroll() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  cargarProductosMayoristas();
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarProductosMayoristas();
   window.addEventListener("scroll", handleScroll);
+
+  // Solución: seguir cargando si el contenido es menor al alto de la pantalla
+  while (
+    document.documentElement.scrollHeight <= document.documentElement.clientHeight &&
+    !noHayMasProductos
+  ) {
+    await cargarProductosMayoristas();
+  }
 });
+
