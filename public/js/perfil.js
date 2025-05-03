@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
+
 
   if (!token || !usuario) {
     location.href = "login.html";
@@ -17,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const detallePedido = document.getElementById("detallePedido");
 
   try {
-    const res = await fetch("/api/pedidos/mios", {
+    const res = await fetch(`${backendURL}/api/pedidos/mios`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

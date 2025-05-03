@@ -7,9 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
 function controlarNavbarPorUsuario() {
   const token = localStorage.getItem("token");
   const usuario = JSON.parse(localStorage.getItem("usuario"));
-
   const perfilBtn = document.getElementById("perfilBtn");
   const logoutBtn = document.getElementById("logoutBtn");
+  const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
+
 
   if (perfilBtn) {
     perfilBtn.addEventListener("click", (e) => {

@@ -1,12 +1,13 @@
 const token = localStorage.getItem('token');
+const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
 
-// Configuración de paginado
 let pagina = 1;
 const limitePorPagina = 12;
 let cargando = false;
 let noHayMasProductos = false;
 
-// 🔄 Cargar productos con paginación infinita
 async function cargarProductos(scroll = false) {
   if (cargando || (scroll && noHayMasProductos)) return;
   cargando = true;
@@ -14,7 +15,7 @@ async function cargarProductos(scroll = false) {
   const listaProductos = document.getElementById('listaProductos');
 
   try {
-    const res = await fetch(`/api/productos?pagina=${pagina}&limite=${limitePorPagina}`, {
+    const res = await fetch(`${backendURL}/api/productos?pagina=${pagina}&limite=${limitePorPagina}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const productos = await res.json();
@@ -24,7 +25,7 @@ async function cargarProductos(scroll = false) {
       return;
     }
 
-    const nuevosProductos = productos.map(p => `
+    const html = productos.map(p => `
       <div class="producto-admin">
         <img src="${p.imagenes?.[0] || '/img/default.png'}" alt="${p.nombre}" style="max-width:100px" />
         <h3>${p.nombre}</h3>
@@ -36,34 +37,34 @@ async function cargarProductos(scroll = false) {
     `).join('');
 
     if (scroll) {
-      listaProductos.insertAdjacentHTML('beforeend', nuevosProductos);
+      listaProductos.insertAdjacentHTML('beforeend', html);
       pagina++;
     } else {
-      listaProductos.innerHTML = nuevosProductos;
-      pagina = 2; // Reseteamos a 2 para la carga infinita
+      listaProductos.innerHTML = html;
+      pagina = 2;
       noHayMasProductos = false;
     }
   } catch (err) {
-    console.error('Error cargando productos:', err);
+    console.error('Error al cargar productos:', err);
   } finally {
     cargando = false;
   }
 }
 
-// 🗑️ Eliminar producto
 window.eliminarProducto = async (id) => {
-  if (confirm('¿Eliminar este producto?')) {
-    await fetch(`/api/productos/${id}`, {
+  if (!confirm('¿Eliminar este producto?')) return;
+
+  try {
+    await fetch(`${backendURL}/api/productos/${id}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     });
-    cargarProductos(); // Recarga lista desde 0 después de eliminar
+    cargarProductos();
+  } catch (err) {
+    alert('Error al eliminar producto');
   }
 };
 
-// ✏️ Editar producto - abrir modal
 window.editarProducto = (id, nombre, descripcion, precioComun, precioMayorista) => {
   document.getElementById('editId').value = id;
   document.getElementById('editNombre').value = decodeURIComponent(nombre);
@@ -73,106 +74,99 @@ window.editarProducto = (id, nombre, descripcion, precioComun, precioMayorista) 
   document.getElementById('modalEditar').style.display = 'flex';
 };
 
-// ❌ Cerrar modal
 function cerrarModal() {
   document.getElementById('modalEditar').style.display = 'none';
 }
 
-// ✅ Enviar edición de producto
 document.getElementById('formEditar').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const id = document.getElementById('editId').value;
   const nombre = document.getElementById('editNombre').value;
   const descripcion = document.getElementById('editDescripcion').value;
-  const precioComun = document.getElementById('editPrecioComun').value;
-  const precioMayorista = document.getElementById('editPrecioMayorista').value;
+  const precioComun = parseFloat(document.getElementById('editPrecioComun').value);
+  const precioMayorista = parseFloat(document.getElementById('editPrecioMayorista').value);
 
-  const res = await fetch(`/api/productos/${id}`, {
+  const res = await fetch(`${backendURL}/api/productos/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      nombre,
-      descripcion,
-      precioComun,
-      precioMayorista
-    }),
+    body: JSON.stringify({ nombre, descripcion, precioComun, precioMayorista }),
   });
 
   if (res.ok) {
     alert('Producto actualizado');
     cerrarModal();
-    cargarProductos(); // Recarga lista después de editar
+    cargarProductos();
   } else {
     alert('Error al actualizar producto');
   }
 });
 
-// 📦 Cargar pedidos
 async function cargarPedidos() {
-  const res = await fetch('/api/pedidos', {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const pedidos = await res.json();
-
   const listaPedidos = document.getElementById('listaPedidos');
-  if (!listaPedidos) return; // Si no está en esta página, no hacer nada
+  if (!listaPedidos) return;
 
-  listaPedidos.innerHTML = pedidos.map(p => `
-    <div class="pedido-admin">
-      <p><strong>Usuario:</strong> ${p.usuario?.email || 'Desconocido'}</p>
-      <p><strong>Estado actual:</strong> ${p.estado}</p>
-      <p><strong>Productos:</strong></p>
-      <ul>
-        ${Array.isArray(p.productos)
-          ? p.productos.map(i => `
-              <li>${i.producto?.nombre || 'Producto eliminado'} x${i.cantidad}</li>
-            `).join('')
-          : '<li>Sin productos</li>'
-        }
-      </ul>
-      <div>
-        <button onclick="actualizarEstado('${p._id}', 'pendiente')">Pendiente</button>
-        <button onclick="actualizarEstado('${p._id}', 'en proceso')">En proceso</button>
-        <button onclick="actualizarEstado('${p._id}', 'enviado')">Enviado</button>
+  try {
+    const res = await fetch(`${backendURL}/api/pedidos`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const pedidos = await res.json();
+
+    listaPedidos.innerHTML = pedidos.map(p => `
+      <div class="pedido-admin">
+        <p><strong>Usuario:</strong> ${p.usuario?.email || 'Desconocido'}</p>
+        <p><strong>Estado:</strong> ${p.estado}</p>
+        <ul>
+          ${Array.isArray(p.productos) ? p.productos.map(i => `
+            <li>${i.producto?.nombre || 'Producto eliminado'} x${i.cantidad}</li>
+          `).join('') : '<li>Sin productos</li>'}
+        </ul>
+        <div>
+          <button onclick="actualizarEstado('${p._id}', 'pendiente')">Pendiente</button>
+          <button onclick="actualizarEstado('${p._id}', 'en proceso')">En proceso</button>
+          <button onclick="actualizarEstado('${p._id}', 'enviado')">Enviado</button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
+  } catch (err) {
+    console.error('Error al cargar pedidos:', err);
+  }
 }
 
-// 📥 Actualizar estado de pedido
-window.actualizarEstado = async (pedidoId, nuevoEstado) => {
-  const res = await fetch(`/api/pedidos/${pedidoId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ estado: nuevoEstado }),
-  });
+window.actualizarEstado = async (id, estado) => {
+  try {
+    const res = await fetch(`${backendURL}/api/pedidos/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ estado }),
+    });
 
-  if (res.ok) {
-    alert('Estado actualizado');
-    cargarPedidos();
-  } else {
-    alert('Error al actualizar estado');
+    if (res.ok) {
+      alert('Estado actualizado');
+      cargarPedidos();
+    } else {
+      alert('Error al actualizar estado');
+    }
+  } catch (err) {
+    alert('Error de red al actualizar estado');
   }
 };
 
-// ⏬ Detectar scroll para cargar más productos
 function handleScroll() {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
   if (scrollTop + clientHeight >= scrollHeight - 100) {
-    cargarProductos(true); // true = modo scroll
+    cargarProductos(true);
   }
 }
 
-// 🚀 Inicio
 document.addEventListener('DOMContentLoaded', () => {
-  const userData = localStorage.getItem('usuario'); 
+  const userData = localStorage.getItem('usuario');
   const user = userData ? JSON.parse(userData) : null;
 
   if (!token || !user || user.rol !== 'admin') {
@@ -182,36 +176,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('formProducto');
 
-  // ➕ Crear nuevo producto
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const formData = new FormData(form);
 
-    const res = await fetch('/api/productos', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData
-    });
+    try {
+      const res = await fetch(`${backendURL}/api/productos`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
 
-    if (res.ok) {
-      alert('Producto creado');
-      form.reset();
-      cargarProductos();
-    } else {
-      const error = await res.json();
-      alert('Error al crear producto: ' + error.mensaje);
+      if (res.ok) {
+        alert('Producto creado');
+        form.reset();
+        cargarProductos();
+      } else {
+        const error = await res.json();
+        alert('Error al crear producto: ' + error.mensaje);
+      }
+    } catch (err) {
+      alert('Error de red al crear producto');
     }
   });
 
-  // ⏬ Carga inicial
   cargarProductos();
   cargarPedidos();
-
-  // 📜 Scroll infinito
   window.addEventListener('scroll', handleScroll);
 });
+
 
   

@@ -2,6 +2,10 @@ const form = document.getElementById('formRegistro');
 const errorElement = document.getElementById('registerError');
 const passwordInput = document.getElementById('password');
 const confirmInput = document.getElementById('confirmPassword');
+const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
+
 
 // Verifica coincidencia mientras el usuario escribe
 confirmInput.addEventListener('input', () => {
@@ -28,7 +32,7 @@ form.addEventListener('submit', async (e) => {
   errorElement.textContent = '';
 
   try {
-    const res = await fetch('/api/usuarios/registro', {
+    const res = await fetch(`${backendURL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, contraseña: password, nombre })

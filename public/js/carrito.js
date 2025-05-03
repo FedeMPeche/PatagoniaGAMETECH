@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const contenedor = document.getElementById('carrito-contenedor');
   const totalCarrito = document.getElementById('total-carrito');
   const finalizarBtn = document.getElementById('finalizar-pedido');
+  const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
+
 
   let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -116,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 0);
   
     try {
-      const res = await fetch('/api/pedidos', {
+      const res = await fetch(`${backendURL}/api/pedidos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

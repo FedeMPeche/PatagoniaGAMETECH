@@ -1,13 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   const id = new URLSearchParams(window.location.search).get('id');
   const detalleContainer = document.getElementById('detalleProducto');
+  const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
 
   if (!id) {
     detalleContainer.innerHTML = '<p>Producto no encontrado.</p>';
     return;
   }
 
-  fetch(`/api/productos/${id}`)
+  fetch(`${backendURL}/api/productos/${id}`)
     .then(res => res.json())
     .then(producto => {
       detalleContainer.innerHTML = `

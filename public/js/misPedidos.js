@@ -1,13 +1,17 @@
 const token = localStorage.getItem('token');
 const usuarioData = localStorage.getItem('usuario');
 const usuario = usuarioData ? JSON.parse(usuarioData) : null;
+const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
+
 
 if (!token || !usuario) {
   window.location.href = 'login.html';
 }
 
 async function cargarMisPedidos() {
-  const res = await fetch('/api/pedidos/mios', {
+  const res = await fetch(`${backendURL}/api/pedidos/mios`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

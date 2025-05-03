@@ -1,10 +1,14 @@
 // pedidosEntrantes.js
 
 const token = localStorage.getItem('token');
+const backendURL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://patagoniagametech.onrender.com';
+
 
 async function cargarPedidos() {
   try {
-    const res = await fetch('/api/pedidos', {
+    const res = await fetch(`${backendURL}/api/pedidos`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -56,7 +60,7 @@ async function cargarPedidos() {
 // Función para actualizar estado
 window.actualizarEstado = async (pedidoId, nuevoEstado) => {
   try {
-    const res = await fetch(`/api/pedidos/${pedidoId}`, {
+    const res = await fetch(`${backendURL}/api/pedidos/${pedidoId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +88,7 @@ window.eliminarPedido = async (pedidoId) => {
   }
 
   try {
-    const res = await fetch(`/api/pedidos/${pedidoId}`, {
+    const res = await fetch(`${backendURL}/api/pedidos/${pedidoId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
