@@ -180,6 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const formData = new FormData(form);
 
+    // Eliminar el campo de la imagen para la prueba (si está presente)
+    formData.delete('imagen'); // Eliminar el archivo de imagen del FormData
+    
     try {
       const res = await fetch(`${backendURL}/api/productos`, {
         method: 'POST',
@@ -204,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cargarPedidos();
   window.addEventListener('scroll', handleScroll);
 });
+
 
 
   
