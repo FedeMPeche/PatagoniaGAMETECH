@@ -28,7 +28,24 @@ router.get('/:id', async (req, res) => {
 });
 
 // ✅ POST nuevo producto con imagen (solo admin)
-router.post('/', verificarToken, verificarAdmin, upload.single('imagen'), crearProducto);
+router.post('/', verificarToken, verificarAdmin, async (req, res) => {
+  try {
+    const { nombre, descripcion, precioComun, precioMayorista } = req.body;
+
+    const nuevoProducto = new Producto({
+      nombre,
+      descripcion,
+      precioComun,
+      precioMayorista,
+      imagenes: [] // o una URL de prueba
+    });
+
+    await nuevoProducto.save();
+    res.status(201).json(nuevoProducto);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al crear producto' });
+  }
+});
 
 // ✅ PUT actualizar producto (solo admin)
 router.put('/:id', verificarToken, verificarAdmin, actualizarProducto);
