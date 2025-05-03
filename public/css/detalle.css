@@ -406,6 +406,11 @@ main.blur, footer.blur {
       margin: 0 48px 0 0;
   }
 
+  .detalle-card .info p {
+    font-size: 1rem;
+    color: #fcfcfc;
+  }
+
   /*CONTACTO*/
   .right {
       display: flex;
@@ -464,6 +469,11 @@ footer.blur {
   }
   .marquesina-contenedor {
       top: 120px;
+  }
+
+  .detalle-card .info p {
+    font-size: 0.5rem;
+    color: #fcfcfc;
   }
 
   /*CONTACT*/
