@@ -502,7 +502,13 @@ footer.blur {
   display: none;
 }
 
+.grid-productos,
+  #mayorista-grid {
+    grid-template-columns: repeat(3, 1fr); 
+}
+
 @media screen and (min-width: 320px) and (max-width: 846px) {
+  
   /*Fuentes*/
   h1 {
       font-size: 36px;
@@ -554,6 +560,10 @@ footer.blur {
       display: none;
   }
 }
+.grid-productos,
+  #mayorista-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
 /* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
 
@@ -587,4 +597,10 @@ footer.blur {
       left: 48px;
       margin: 0;
   } 
+
+  .grid-productos,
+  .grid-productos,
+  #mayorista-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
 }
