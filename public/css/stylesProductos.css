@@ -196,9 +196,9 @@ main {
   max-width: 1000px;
   margin: 20px;
   border: 1px solid #ccc;
-  background-color: #1e1e2f;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .detalle-card .imagenes {
@@ -221,17 +221,17 @@ main {
 }
 
 .detalle-card .info h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 10px;
 }
 
 .detalle-card .info p {
-  font-size: 3rem;
+  font-size: 1rem;
   color: #555;
 }
 
 .detalle-card .info .precio {
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin: 10px 0;
 }
