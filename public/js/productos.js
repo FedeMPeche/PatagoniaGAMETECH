@@ -2,9 +2,11 @@ let pagina = 1;
 const limitePorPagina = 8;
 let cargando = false;
 let noHayMasProductos = false;
+
 const backendURL = window.location.hostname.includes('localhost')
   ? 'http://localhost:8080'
   : 'https://patagoniagametech.onrender.com';
+
 const contenedor = document.getElementById("productos-grid");
 const loader = document.getElementById("loader");
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -28,7 +30,6 @@ async function cargarProductos() {
       const card = document.createElement("div");
       card.className = "producto-card";
 
-      // Elemento de cantidad
       let cantidad = 1;
 
       card.innerHTML = `
@@ -45,7 +46,6 @@ async function cargarProductos() {
         </div>
       `;
 
-      // Botones de cantidad
       const btnMenos = card.querySelector('.btn-menos');
       const btnMas = card.querySelector('.btn-mas');
       const spanCantidad = card.querySelector('.cantidad');
@@ -65,7 +65,6 @@ async function cargarProductos() {
         spanCantidad.textContent = cantidad;
       });
 
-      // Agregar al carrito
       btnAgregar.addEventListener('click', (e) => {
         e.stopPropagation();
 
@@ -86,7 +85,6 @@ async function cargarProductos() {
         alert(`Se agregó ${cantidad} x ${producto.nombre} al carrito`);
       });
 
-      // Redirección al detalle
       card.addEventListener('click', () => {
         window.location.href = `detalle.html?id=${producto._id}`;
       });
@@ -110,9 +108,17 @@ function handleScroll() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  cargarProductos();
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarProductos();
   window.addEventListener("scroll", handleScroll);
+
+  // Solución: cargar más productos si no hay scroll disponible
+  while (
+    document.documentElement.scrollHeight <= document.documentElement.clientHeight &&
+    !noHayMasProductos
+  ) {
+    await cargarProductos();
+  }
 });
 
 
