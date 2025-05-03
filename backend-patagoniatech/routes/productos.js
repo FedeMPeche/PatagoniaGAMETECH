@@ -28,25 +28,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // ✅ POST nuevo producto con imagen (solo admin)
-router.post('/', verificarToken, verificarAdmin, upload.single('imagen'), async (req, res) => {
-  try {
-    const { nombre, descripcion, precioComun, precioMayorista } = req.body;
-    const imagenURL = req.file ? `/uploads/${req.file.filename}` : '';
-
-    const nuevoProducto = new Producto({
-      nombre,
-      descripcion,
-      precioComun,
-      precioMayorista,
-      imagenes: imagenURL ? [imagenURL] : []
-    });
-
-    await nuevoProducto.save();
-    res.status(201).json(nuevoProducto);
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al crear producto' });
-  }
-});
+router.post('/', verificarToken, verificarAdmin, upload.single('imagen'), crearProducto);
 
 // ✅ PUT actualizar producto (solo admin)
 router.put('/:id', verificarToken, verificarAdmin, actualizarProducto);
@@ -55,3 +37,4 @@ router.put('/:id', verificarToken, verificarAdmin, actualizarProducto);
 router.delete('/:id', verificarToken, verificarAdmin, eliminarProducto);
 
 module.exports = router;
+

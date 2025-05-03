@@ -10,7 +10,7 @@ exports.obtenerProductos = async (req, res) => {
     const productos = await Producto.find()
       .skip(skip)
       .limit(limite)
-      .sort({ _id: -1 }); // Opcional: ordena del más nuevo al más viejo
+      .sort({ _id: -1 });
 
     res.json(productos);
   } catch (error) {
@@ -21,10 +21,21 @@ exports.obtenerProductos = async (req, res) => {
 // POST /api/productos
 exports.crearProducto = async (req, res) => {
   try {
-    const nuevoProducto = new Producto(req.body);
+    const { nombre, descripcion, precioComun, precioMayorista } = req.body;
+    const imagenURL = req.file ? `/uploads/${req.file.filename}` : '';
+
+    const nuevoProducto = new Producto({
+      nombre,
+      descripcion,
+      precioComun,
+      precioMayorista,
+      imagenes: imagenURL ? [imagenURL] : []
+    });
+
     await nuevoProducto.save();
     res.status(201).json(nuevoProducto);
   } catch (error) {
+    console.error('Error al crear producto:', error);
     res.status(500).json({ mensaje: 'Error al crear producto' });
   }
 };
