@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { verificarToken } = require('../middleware/authMiddleware');
 
 // POST /api/auth/registro
-router.post('/registro', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { nombre, email, contraseña } = req.body;
 
   try {

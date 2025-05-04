@@ -27,8 +27,11 @@ app.use('/api/productos', productosRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/pedidos', pedidosRoutes);
 
-// SPA (Single Page Application) - rutas del cliente
-app.get('*', (req, res) => {
+// SPA (Single Page Application) - servir index.html solo si NO es una ruta de la API
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ mensaje: 'Ruta de API no encontrada' });
+  }
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
