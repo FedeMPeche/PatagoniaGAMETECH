@@ -1,3 +1,5 @@
+console.log('register.js cargado');
+
 const form = document.getElementById('formRegistro');
 const errorElement = document.getElementById('registerError');
 const passwordInput = document.getElementById('password');
