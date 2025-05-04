@@ -432,7 +432,7 @@ footer.blur {
         cursor: default;
         font-weight: 400;
     }
-
+  
     /*NAV*/
     .navbar {
         padding: 0 48px;
@@ -449,41 +449,46 @@ footer.blur {
     #redes {
         transition: 0.5s;
     }
-
+    .marquesina-contenedor {
+        margin: 0 48px 0 0;
+    }
+  
     /*CONTACTO*/
-  .right {
-    display: flex;
-    padding: 48px 0;
-    gap: 36px;
-}
-
-.redes-contact {
-    display: flex;
-    gap: 12px;
-}
-.logos-contact {
-    display: flex;
-    gap: 12px;
-}
-.social-logo.contact {
-    height: 36px;
-}
-footer p {
-    font-size: 14px;
-}
-.dev-container {
-    gap: 12px;
-
-}
-main.blur,
-footer.blur {
+    .right {
+        display: flex;
+        padding: 48px 0;
+        gap: 36px;
+    }
+    
+    .redes-contact {
+        display: flex;
+        gap: 12px;
+    }
+    .logos-contact {
+        display: flex;
+        gap: 12px;
+    }
+    .social-logo.contact {
+        height: 36px;
+    }
+    footer p {
+        font-size: 14px;
+    }
+    .dev-container {
+        gap: 12px;
+    }
+  }
+  
+  /* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
+  
+  main.blur,
+  footer.blur {
     filter: blur(5px);
     transition: filter 0.3s ease;
-}
-}
-
-/*TABLET*/
-@media screen and (max-width: 1024px) {
+  }
+  
+  /*TABLET*/
+  @media screen and (max-width: 1024px) {
     * {
         transition: none;
     }
@@ -504,55 +509,69 @@ footer.blur {
         right: 48px;
         margin: 0;
     }
+    .marquesina-contenedor {
+        top: 120px;
+    }
+  
     /*CONTACT*/
-  #contacto {
-    display: flex;
-    flex-direction: column;
-}
-.left {
-    background-attachment: fixed;
-}
-.right {
-    padding: 64px 0;
-}
-/*FOOTER*/
-footer {
-    display: flex;
-    gap: 48px;
-    flex-direction: column;
-    background-color: black;
-    padding: 64px 0;
-}
-.footer-left {
-    height: auto;
-    margin-top: 0;
-    display: flex;
-    gap: 24px;
-    padding-bottom: 0;
-}
-.footer-right {
-    height: auto;
-    margin-top: 0;
-    display: flex;
-    justify-content: end;
-    padding-bottom: 0;
-}
-}
-
-/*MINI TABLET*/
-@media screen and (max-width: 846px) {
-   /*CONTACTO*/
-  .right {
-    padding: 48px 0;
-} 
-
-.navbar-icon {
+    #contacto {
+        display: flex;
+        flex-direction: column;
+    }
+    .left {
+        background-attachment: fixed;
+    }
+    .right {
+        padding: 64px 0;
+    }
+    /*FOOTER*/
+    footer {
+        display: flex;
+        gap: 48px;
+        flex-direction: column;
+        background-color: black;
+        padding: 64px 0;
+    }
+    .footer-left {
+        height: auto;
+        margin-top: 0;
+        display: flex;
+        gap: 24px;
+        padding-bottom: 0;
+    }
+    .footer-right {
+        height: auto;
+        margin-top: 0;
+        display: flex;
+        justify-content: end;
+        padding-bottom: 0;
+    }
+  }
+  
+  /* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
+  
+  main.blur,
+  footer.blur {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+  }
+  
+  /*MINI TABLET*/
+  @media screen and (max-width: 846px) {
+    /*CONTACTO*/
+    .right {
+        padding: 48px 0;
+    }
+  }
+  
+  /*Navegación de botón desplegable*/
+  .navbar-icon {
     display: none;
-}
-.navbar-icon img {
+  }
+  .navbar-icon img {
     height: 40px;
-}
-.navbar-responsive {
+  }
+  .navbar-responsive {
     background-color: var(--color);
     position: absolute;
     top: 80px;
@@ -568,57 +587,70 @@ footer {
     overflow: hidden;
     visibility: hidden;
     transition: height 0.3s ease, visibility 0.3s ease;
-}
-.navbar-responsive {
+  }
+  .navbar-responsive {
     visibility: hidden;
-}
-.navbar-responsive.open {
+  }
+  .navbar-responsive.open {
     visibility: visible;
     height: 400px;
     padding: 16px;
-}
-.navlist-responsive {
+  }
+  .navlist-responsive {
     width: 100%;
     display: flex;
     flex-direction: column;
-}
-.navlist-responsive li {
+  }
+  .navlist-responsive li {
     height: 48px;
-}
-
-.navlist-responsive a {
+  }
+  
+  .navlist-responsive a {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.redes-responsive {
+  }
+  .redes-responsive {
     display: flex;
     gap: 8px;
-}
-.redes-responsive li {
+  }
+  .redes-responsive li {
     height: 48px;
     width: 48px;
     display: flex;
-}
-.redes-responsive a {
+  }
+  .redes-responsive a {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.redes-responsive img {
+  }
+  .redes-responsive img {
     height: 32px;
-}
-
-.saludo {
+  }
+  
+  /* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
+  
+  main.blur,
+  footer.blur {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+  }
+  
+  .saludo {
     display: none;
-}
-}
-
-@media screen and (min-width: 320px) and (max-width: 846px) {
+  }
+  
+  .grid-productos,
+    #mayorista-grid {
+      grid-template-columns: repeat(3, 1fr); 
+  }
+  
+  @media screen and (min-width: 320px) and (max-width: 846px) {
+    
     /*Fuentes*/
     h1 {
         font-size: 36px;
@@ -655,6 +687,11 @@ footer {
     .nav-list {
         display: none;
     }
+  
+    .carritoResponsive {
+        display: flex;
+    }
+  
     .navbar-icon {
         display: flex;
     }
@@ -664,9 +701,21 @@ footer {
     .marquesina-contenedor {
         display: none;
     }
-}
-
-@media screen and (max-height: 414px) {
+  }
+  .grid-productos,
+    #mayorista-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+  /* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
+  
+  main.blur,
+  footer.blur {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+  }
+  
+  @media screen and (max-height: 414px) {
     .navbar {
         height: 48px;
     }
@@ -679,10 +728,21 @@ footer {
     #inicio {
         height: 414px;
     }
+    .marquesina-contenedor {
+        margin: 0 0 0 48px;
+        top: 88px;
+        left: 0;
+    }
     #redes {
         position: absolute;
         top: 64px;
         left: 48px;
         margin: 0;
     } 
+  
+    .grid-productos,
+    .grid-productos,
+    #mayorista-grid {
+      grid-template-columns: repeat(3, 1fr); 
+    }
 }
