@@ -191,14 +191,12 @@ main {
   /* -------------------- TARJETAS PRODUCTOS DESTACADOS -------------------- */
 .destacados {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 40px;
-    background-color: transparent; /* o lo que vos desees */
+    background-color: transparent;
     max-width: 1200px;
     margin: 0 auto;
-    max-height: calc(3 * 320px); /* limitar a 3 filas visibles */
-    overflow: hidden;
 }
 
   
@@ -585,20 +583,19 @@ footer.blur {
         font-size: 14px;
     }
     .dev-container {
+        margin-top: 30px;
         gap: 12px;
     }
-}
+    /* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
 
-/* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
-
-main.blur,
-footer.blur {
-    filter: blur(5px);
-    transition: filter 0.3s ease;
-}
-
-.destacados {
-    grid-template-columns: repeat(3, 1fr);
+    main.blur,
+    footer.blur {
+        filter: blur(5px);
+        transition: filter 0.3s ease;
+    }
+    .destacados {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /*TABLET*/
@@ -660,15 +657,11 @@ footer.blur {
         justify-content: end;
         padding-bottom: 0;
     }
+    .destacados {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-/* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
-
-main.blur,
-footer.blur {
-    filter: blur(5px);
-    transition: filter 0.3s ease;
-}
 
 /*MINI TABLET*/
 @media screen and (max-width: 846px) {
@@ -756,6 +749,10 @@ footer.blur {
 
 .saludo {
     display: none;
+}
+
+.destacados {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 @media screen and (min-width: 320px) and (max-width: 846px) {
