@@ -567,14 +567,13 @@ footer.blur {
         margin: 0 48px 0 0;
     }
     .producto {
-        flex: 1 1 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        height: auto;
-        min-height: 350px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 40px;
+        background-color: transparent;
+        max-width: 90%;
+        margin: 0 auto;
     }
     /* Asegura que las imágenes no desborden ni deformen */
     .producto img {
