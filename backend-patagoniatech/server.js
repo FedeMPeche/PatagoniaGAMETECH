@@ -16,7 +16,10 @@ const pedidosRoutes = require('./routes/pedidos');
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: ['https://patagonia-gametech.vercel.app'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.static('public')); // Archivos estáticos del frontend
 app.use('/uploads', express.static('uploads')); // Archivos subidos (como imágenes)
