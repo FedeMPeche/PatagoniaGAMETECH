@@ -195,7 +195,7 @@ main {
     gap: 20px;
     padding: 40px;
     background-color: transparent;
-    max-width: 1200px;
+    max-width: 90%;
     margin: 0 auto;
 }
 
@@ -594,7 +594,7 @@ footer.blur {
         transition: filter 0.3s ease;
     }
     .destacados {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -658,7 +658,7 @@ footer.blur {
         padding-bottom: 0;
     }
     .destacados {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -739,20 +739,8 @@ footer.blur {
     height: 32px;
 }
 
-/* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
-
-main.blur,
-footer.blur {
-    filter: blur(5px);
-    transition: filter 0.3s ease;
-}
-
 .saludo {
     display: none;
-}
-
-.destacados {
-    grid-template-columns: repeat(2, 1fr);
 }
 
 @media screen and (min-width: 320px) and (max-width: 846px) {
@@ -806,14 +794,9 @@ footer.blur {
     .marquesina-contenedor {
         display: none;
     }
-}
-
-/* EFECTO BLUR PARA CUANDO SE DESPLIEGA LA NAV */
-
-main.blur,
-footer.blur {
-    filter: blur(5px);
-    transition: filter 0.3s ease;
+    .destacados {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media screen and (max-height: 414px) {
@@ -839,5 +822,8 @@ footer.blur {
         top: 64px;
         left: 48px;
         margin: 0;
+    }
+    .destacados {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
