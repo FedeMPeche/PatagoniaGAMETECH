@@ -7,32 +7,33 @@ const { verificarToken } = require('../middleware/authMiddleware');
 
 // POST /api/auth/registro
 router.post('/register', async (req, res) => {
-  const { nombre, email, password } = req.body; // CAMBIADO
+  const { nombre, email, password } = req.body;
 
   try {
+    if (!nombre || !email || !password) {
+      return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
+    }
+
     const existeUsuario = await Usuario.findOne({ email });
     if (existeUsuario) {
       return res.status(400).json({ mensaje: 'El usuario ya existe' });
     }
 
-    // Cifrar la contraseña
     const salt = await bcrypt.genSalt(10);
-    const hashContraseña = await bcrypt.hash(password, salt); // CAMBIADO
+    const hashContraseña = await bcrypt.hash(password, salt);
 
     const nuevoUsuario = new Usuario({
       nombre,
       email,
-      contraseña: hashContraseña // SE MANTIENE COMO "contraseña" en el modelo
+      contraseña: hashContraseña
     });
 
     await nuevoUsuario.save();
 
-    // Crear el token JWT
     const token = jwt.sign({ id: nuevoUsuario._id }, process.env.JWT_SECRET, {
       expiresIn: '7d'
     });
 
-    // Enviar el token como respuesta
     res.status(201).json({ token });
   } catch (error) {
     console.error(error);
@@ -45,6 +46,10 @@ router.post('/login', async (req, res) => {
   const { email, contraseña } = req.body;
 
   try {
+    if (!email || !contraseña) {
+      return res.status(400).json({ mensaje: 'Email y contraseña son obligatorios' });
+    }
+
     const usuario = await Usuario.findOne({ email });
     if (!usuario) {
       return res.status(400).json({ mensaje: 'Usuario no encontrado' });
