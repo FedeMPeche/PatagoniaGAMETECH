@@ -7,7 +7,7 @@ const { verificarToken } = require('../middleware/authMiddleware');
 
 // POST /api/auth/registro
 router.post('/register', async (req, res) => {
-  const { nombre, email, contraseña } = req.body;
+  const { nombre, email, password } = req.body; // CAMBIADO
 
   try {
     const existeUsuario = await Usuario.findOne({ email });
@@ -17,12 +17,12 @@ router.post('/register', async (req, res) => {
 
     // Cifrar la contraseña
     const salt = await bcrypt.genSalt(10);
-    const hashContraseña = await bcrypt.hash(contraseña, salt);
+    const hashContraseña = await bcrypt.hash(password, salt); // CAMBIADO
 
     const nuevoUsuario = new Usuario({
       nombre,
       email,
-      contraseña: hashContraseña
+      contraseña: hashContraseña // SE MANTIENE COMO "contraseña" en el modelo
     });
 
     await nuevoUsuario.save();
@@ -32,10 +32,10 @@ router.post('/register', async (req, res) => {
       expiresIn: '7d'
     });
 
-    // Responder con el token
+    // Enviar el token como respuesta
     res.status(201).json({ token });
   } catch (error) {
-    console.error(error); // Imprimir el error para depuración
+    console.error(error);
     res.status(500).json({ mensaje: 'Error al registrar usuario' });
   }
 });
@@ -45,23 +45,30 @@ router.post('/login', async (req, res) => {
   const { email, contraseña } = req.body;
 
   try {
-    // Buscar al usuario por el email
     const usuario = await Usuario.findOne({ email });
-    if (!usuario) return res.status(400).json({ mensaje: 'Usuario no encontrado' });
+    if (!usuario) {
+      return res.status(400).json({ mensaje: 'Usuario no encontrado' });
+    }
 
-    // Comparar la contraseña
     const esValido = await bcrypt.compare(contraseña, usuario.contraseña);
-    if (!esValido) return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
+    if (!esValido) {
+      return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
+    }
 
-    // Crear el token JWT
     const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
       expiresIn: '7d'
     });
 
-    // Responder con el token y los datos del usuario
-    res.json({ token, usuario: { id: usuario._id, email: usuario.email, rol: usuario.rol } });
+    res.json({
+      token,
+      usuario: {
+        id: usuario._id,
+        email: usuario.email,
+        rol: usuario.rol
+      }
+    });
   } catch (error) {
-    console.error(error); // Imprimir el error para depuración
+    console.error(error);
     res.status(500).json({ mensaje: 'Error al iniciar sesión' });
   }
 });
@@ -72,3 +79,4 @@ router.get('/perfil', verificarToken, async (req, res) => {
 });
 
 module.exports = router;
+
