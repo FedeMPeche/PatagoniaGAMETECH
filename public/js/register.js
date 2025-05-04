@@ -35,7 +35,7 @@ form.addEventListener('submit', async (e) => {
     const res = await fetch(`${backendURL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, contraseña: password, nombre })
+      body: JSON.stringify({ email, password, nombre }) 
     });
 
     const data = await res.json();
