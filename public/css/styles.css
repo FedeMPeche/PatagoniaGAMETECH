@@ -776,6 +776,16 @@ footer.blur {
     display: none;
 }
 
+@media (max-width: 768px) {
+    .grid-productos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .destacados {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
 @media screen and (min-width: 320px) and (max-width: 846px) {
     /*Fuentes*/
     h1 {
