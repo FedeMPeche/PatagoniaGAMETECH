@@ -11,14 +11,14 @@ const generarToken = (usuarioId, rol) => {
 // POST /api/usuarios/registro
 exports.registrarUsuario = async (req, res) => {
   try {
-    const { email, contraseña, nombre } = req.body;
+    const { email, password, nombre } = req.body;
 
     const usuarioExistente = await Usuario.findOne({ email });
     if (usuarioExistente) {
       return res.status(400).json({ mensaje: 'El email ya está registrado' });
     }
 
-    const nuevoUsuario = new Usuario({ email, contraseña, nombre });
+    const nuevoUsuario = new Usuario({ email, contraseña: password, nombre });
     await nuevoUsuario.save();
 
     const token = generarToken(nuevoUsuario._id, nuevoUsuario.rol);
@@ -39,14 +39,14 @@ exports.registrarUsuario = async (req, res) => {
 // POST /api/usuarios/login
 exports.loginUsuario = async (req, res) => {
   try {
-    const { email, contraseña } = req.body;
+    const { email, password } = req.body;
 
     const usuario = await Usuario.findOne({ email });
     if (!usuario) {
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
 
-    const passwordValido = await usuario.compararContraseña(contraseña);
+    const passwordValido = await usuario.compararContraseña(password);
     if (!passwordValido) {
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
