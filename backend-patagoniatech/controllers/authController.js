@@ -18,7 +18,7 @@ exports.registrarUsuario = async (req, res) => {
       return res.status(400).json({ mensaje: 'El email ya está registrado' });
     }
 
-    const nuevoUsuario = new Usuario({ email, contraseña: password, nombre });
+    const nuevoUsuario = new Usuario({ email, password, nombre });
     await nuevoUsuario.save();
 
     const token = generarToken(nuevoUsuario._id, nuevoUsuario.rol);
@@ -46,7 +46,7 @@ exports.loginUsuario = async (req, res) => {
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
 
-    const passwordValido = await usuario.compararContraseña(password);
+    const passwordValido = await usuario.compararPassword(password);
     if (!passwordValido) {
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
