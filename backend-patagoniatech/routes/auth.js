@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { verificarToken } = require('../middleware/authMiddleware');
 
-// POST /api/auth/registro
+// POST /api/auth/register
 router.post('/register', async (req, res) => {
   const { nombre, email, password } = req.body;
 
@@ -20,12 +20,12 @@ router.post('/register', async (req, res) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-    const hashContraseña = await bcrypt.hash(password, salt);
+    const hashPassword = await bcrypt.hash(password, salt);
 
     const nuevoUsuario = new Usuario({
       nombre,
       email,
-      contraseña: hashContraseña
+      password: hashPassword
     });
 
     await nuevoUsuario.save();
@@ -43,20 +43,25 @@ router.post('/register', async (req, res) => {
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
-  console.log("Body recibido:", req.body);
-  const { email, contraseña } = req.body;
+  const { email, password } = req.body;
+
+  console.log("Intentando iniciar sesión con:", { email, password });
 
   try {
-    if (!email || !contraseña) {
+    if (!email || !password) {
       return res.status(400).json({ mensaje: 'Email y contraseña son obligatorios' });
     }
 
     const usuario = await Usuario.findOne({ email });
+    console.log("Usuario encontrado:", usuario);
+
     if (!usuario) {
       return res.status(400).json({ mensaje: 'Usuario no encontrado' });
     }
 
-    const esValido = await bcrypt.compare(contraseña, usuario.contraseña);
+    const esValido = await bcrypt.compare(password, usuario.password);
+    console.log("Contraseña válida:", esValido);
+
     if (!esValido) {
       return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
     }
@@ -74,7 +79,7 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error en el login:", error);
     res.status(500).json({ mensaje: 'Error al iniciar sesión' });
   }
 });
@@ -85,4 +90,5 @@ router.get('/perfil', verificarToken, async (req, res) => {
 });
 
 module.exports = router;
+
 
