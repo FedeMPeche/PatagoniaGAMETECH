@@ -13,11 +13,8 @@ const verificarToken = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Guardamos el ID del usuario para usar en los controladores
     req.usuarioId = decoded.id;
-
-    // También guardamos el usuario completo si lo necesitás
-    req.usuario = await Usuario.findById(decoded.id).select('-contraseña');
+    req.usuario = await Usuario.findById(decoded.id).select('-password');
 
     next();
   } catch (error) {
@@ -37,3 +34,4 @@ module.exports = {
   verificarToken,
   verificarAdmin
 };
+

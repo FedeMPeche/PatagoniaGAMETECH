@@ -70,7 +70,7 @@ exports.loginUsuario = async (req, res) => {
 // GET /api/usuarios/perfil
 exports.obtenerPerfil = async (req, res) => {
   try {
-    const usuario = await Usuario.findById(req.usuarioId).select('-contraseña');
+    const usuario = await Usuario.findById(req.usuarioId).select('-password');
     res.json(usuario);
   } catch (error) {
     res.status(500).json({ mensaje: 'Error al obtener perfil' });
@@ -87,7 +87,7 @@ exports.actualizarPerfil = async (req, res) => {
 
     if (nombre) usuario.nombre = nombre;
     if (email) usuario.email = email;
-    if (contraseña) usuario.contraseña = contraseña;
+    if (contraseña) usuario.password = contraseña; // 👈 cambio clave
 
     await usuario.save();
 
