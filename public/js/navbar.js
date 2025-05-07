@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 👉 Función para controlar el estado del navbar (login / admin / invitado)
 function controlarNavbarPorUsuario() {
-  const token = localStorage.getItem("token");
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  // const token = localStorage.getItem("token");
+  // const usuario = JSON.parse(localStorage.getItem("usuario"));
   const perfilBtn = document.getElementById("perfilBtn");
   const logoutBtn = document.getElementById("logoutBtn");
   const backendURL = window.location.hostname.includes('localhost')
@@ -17,15 +17,15 @@ function controlarNavbarPorUsuario() {
   if (perfilBtn) {
     perfilBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      if (token && usuario) {
-        if (usuario.rol === "admin") {
-          window.location.href = "admin.html";
-        } else {
-          window.location.href = "perfil.html";
-        }
-      } else {
-        window.location.href = "login.html";
-      }
+      // if (token && usuario) {
+      //   if (usuario.rol === "admin") {
+      //     window.location.href = "admin.html";
+      //   } else {
+      //     window.location.href = "perfil.html";
+      //   }
+      // } else {
+      //   window.location.href = "login.html";
+      // }
     });
   }
 
@@ -38,24 +38,34 @@ function controlarNavbarPorUsuario() {
   }
 
   // Mostrar u ocultar elementos del navbar según login y rol
-  const elementosSoloInvitado = document.querySelectorAll(".solo-invitado");
-  const elementosSoloLogueado = document.querySelectorAll(".solo-logueado");
-  const elementosSoloAdmin = document.querySelectorAll(".solo-admin");
+//   const elementosSoloInvitado = document.querySelectorAll(".solo-invitado");
+//   const elementosSoloLogueado = document.querySelectorAll(".solo-logueado");
+//   const elementosSoloAdmin = document.querySelectorAll(".solo-admin");
 
-  if (token && usuario) {
-    elementosSoloInvitado.forEach(el => el.style.display = "none");
-    elementosSoloLogueado.forEach(el => el.style.display = "inline-block");
+//   if (token && usuario) {
+//     elementosSoloInvitado.forEach(el => el.style.display = "none");
+//     elementosSoloLogueado.forEach(el => el.style.display = "inline-block");
 
-    if (usuario.rol === "admin") {
-      elementosSoloAdmin.forEach(el => el.style.display = "inline-block");
-    } else {
-      elementosSoloAdmin.forEach(el => el.style.display = "none");
-    }
-  } else {
-    elementosSoloInvitado.forEach(el => el.style.display = "inline-block");
-    elementosSoloLogueado.forEach(el => el.style.display = "none");
-    elementosSoloAdmin.forEach(el => el.style.display = "none");
-  }
+//     if (usuario.rol === "admin") {
+//       elementosSoloAdmin.forEach(el => el.style.display = "inline-block");
+//     } else {
+//       elementosSoloAdmin.forEach(el => el.style.display = "none");
+//     }
+//   } else {
+//     elementosSoloInvitado.forEach(el => el.style.display = "inline-block");
+//     elementosSoloLogueado.forEach(el => el.style.display = "none");
+//     elementosSoloAdmin.forEach(el => el.style.display = "none");
+//   }
+// }
+
+// Mostrar todos los botones como si fueran invitados
+const elementosSoloInvitado = document.querySelectorAll(".solo-invitado");
+const elementosSoloLogueado = document.querySelectorAll(".solo-logueado");
+const elementosSoloAdmin = document.querySelectorAll(".solo-admin");
+
+elementosSoloInvitado.forEach(el => el.style.display = "inline-block");
+elementosSoloLogueado.forEach(el => el.style.display = "none");
+elementosSoloAdmin.forEach(el => el.style.display = "none");
 }
 
 // 👉 Función para actualizar el contador de productos en el carrito
